@@ -353,7 +353,7 @@ sparcv9_STAND_FLAGS=	-ffreestanding
 # additions to SSE (SSE2, AVX ,etc.)
 NO_SIMD=		-mno-mmx -mno-sse
 i386_STAND_FLAGS=	-ffreestanding $(NO_SIMD)
-amd64_STAND_FLAGS=	-xmodel=kernel $(NO_SIMD)
+amd64_STAND_FLAGS=	-ffreestanding -mcmodel=kernel -mno-red-zone $(NO_SIMD)
 
 SAVEARGS=		-msave-args
 amd64_STAND_FLAGS	+= $(SAVEARGS)
