@@ -54,9 +54,9 @@ LDFLAGS		+= -dy -Nmisc/agpmaster -Nmisc/gfx_private
 include $(UTSBASE)/intel/Makefile.intel
 include $(UTSBASE)/common/io/drm/Makefile.mod
 
-CERRWARN	+= -_gcc=-Wno-parentheses
-CERRWARN	+= -_gcc=-Wno-unused-function
-CERRWARN	+= -_gcc=-Wno-unused-variable
+CERRWARN	+= -Wno-parentheses
+CERRWARN	+= -Wno-unused-function
+CERRWARN	+= -Wno-unused-variable
 
 #
 #	Define targets

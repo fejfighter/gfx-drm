@@ -57,10 +57,10 @@ LDFLAGS		+= -dy -Nmisc/drm
 include $(UTSBASE)/intel/Makefile.intel
 include $(UTSBASE)/intel/io/i915/Makefile.mod
 
-CERRWARN	+= -_gcc=-Wno-parentheses
-CERRWARN	+= -_gcc=-Wno-unused-function
-CERRWARN	+= -_gcc=-Wno-unused-variable
-CERRWARN	+= -_gcc=-Wno-override-init
+CERRWARN	+= -Wno-parentheses
+CERRWARN	+= -Wno-unused-function
+CERRWARN	+= -Wno-unused-variable
+CERRWARN	+= -Wno-override-init
 
 #
 #	Define targets

@@ -36,7 +36,7 @@ ALL_TARGET	= $(BINARY) $(SRC_CONFILE)
 LINT_TARGET	= $(MODULE).lint
 INSTALL_TARGET	= $(BINARY) $(ROOTMODULE) $(ROOT_CONFFILE)
 
-CERRWARN	+= -_gcc=-Wno-parentheses
+CERRWARN	+= -Wno-parentheses
 
 #
 # For now, disable these lint checks; maintainers should endeavor

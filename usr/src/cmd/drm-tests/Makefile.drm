@@ -25,5 +25,5 @@ LIBUTIL32=$(SRC)/cmd/drm-tests/util/i386/libutil.a
 LIBUTIL64=$(SRC)/cmd/drm-tests/util/amd64/libutil.a
 
 # We don't really care about warnings in the tests.
-CERRWARN +=	-_gcc=-Wno-parentheses
-CERRWARN +=	-_gcc=-Wno-uninitialized
+CERRWARN +=	-Wno-parentheses
+CERRWARN +=	-Wno-uninitialized
