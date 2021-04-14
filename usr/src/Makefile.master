@@ -756,15 +756,11 @@ NATIVE_MACH=	$(MACH:amd64=i386)
 # Base directory where compilers are loaded.
 # Defined here so it can be overridden by developer.
 #
-SPRO_ROOT=		$(BUILD_TOOLS)/SUNWspro
-SPRO_VROOT=		$(SPRO_ROOT)/SS12
 GNU_ROOT=		/usr
 
 
-$(__GNUC)PRIMARY_CC=	gcc7,$(GNUC_ROOT)/bin/gcc,gnu
-$(__SUNC)PRIMARY_CC=	studio12,$(SPRO_VROOT)/bin/cc,sun
-$(__GNUC)PRIMARY_CCC=	gcc7,$(GNUC_ROOT)/bin/g++,gnu
-$(__SUNC)PRIMARY_CCC=	studio12,$(SPRO_VROOT)/bin/CC,sun
+$(__GNUC)PRIMARY_CC=	$(GNUC_ROOT)/bin/gcc
+$(__GNUC)PRIMARY_CCC=	$(GNUC_ROOT)/bin/g++
 CW_CC_COMPILERS=	$(PRIMARY_CC:%=--primary %) $(SHADOW_CCS:%=--shadow %)
 CW_CCC_COMPILERS=	$(PRIMARY_CCC:%=--primary %) $(SHADOW_CCCS:%=--shadow %)
 
