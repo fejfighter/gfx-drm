@@ -363,7 +363,7 @@ STAND_FLAGS_64 = $($(MACH64)_STAND_FLAGS)
 
 #
 # disable the incremental linker
-ILDOFF=			-xildoff
+#ILDOFF=			-xildoff
 #
 XDEPEND=		-xdepend
 XFFLAG=			-xF=%all
