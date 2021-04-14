@@ -26,8 +26,8 @@ FETCH=	$(PYTHON) $(SRC)/tools/userland-fetch
 LIBDRM_VERS=2.4.105
 
 LIBDRM_DIR=libdrm-$(LIBDRM_VERS)
-LIBDRM_ARCHIVE=$(LIBDRM_DIR).tar
-LIBDRM_URL=http://dri.freedesktop.org/libdrm/$(LIBDRM_ARCHIVE).xz
+LIBDRM_ARCHIVE=$(LIBDRM_DIR).tar.xz
+LIBDRM_URL=http://dri.freedesktop.org/libdrm/$(LIBDRM_ARCHIVE)
 LIBDRM_HASH=sha256:1d1d024b7cadc63e2b59cddaca94f78864940ab440843841113fbac6afaf2a46
 
 def all install install_h: .patched check
@@ -59,8 +59,7 @@ check: FRC
 	touch $@
 
 .unpacked: $(USERLAND_ARCHIVES)$(LIBDRM_ARCHIVE)
-	xz -d $(USERLAND_ARCHIVES)$(LIBDRM_ARCHIVE).xz
-	tar xvfjo $(USERLAND_ARCHIVES)$(LIBDRM_ARCHIVE)
+	xz -d $(USERLAND_ARCHIVES)$(LIBDRM_ARCHIVE)
 	touch $@
 
 $(USERLAND_ARCHIVES)$(LIBDRM_ARCHIVE) :
