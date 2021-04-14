@@ -355,7 +355,7 @@ NO_SIMD=		-mno-mmx -mno-sse
 i386_STAND_FLAGS=	-ffreestanding $(NO_SIMD)
 amd64_STAND_FLAGS=	-xmodel=kernel $(NO_SIMD)
 
-SAVEARGS=		-msave_args
+SAVEARGS=		-msave-args
 amd64_STAND_FLAGS	+= $(SAVEARGS)
 
 STAND_FLAGS_32 = $($(MACH)_STAND_FLAGS)
