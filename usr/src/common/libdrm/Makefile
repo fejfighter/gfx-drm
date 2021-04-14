@@ -28,7 +28,7 @@ LIBDRM_VERS=2.4.105
 LIBDRM_DIR=libdrm-$(LIBDRM_VERS)
 LIBDRM_ARCHIVE=$(LIBDRM_DIR).tar.xz
 LIBDRM_URL=http://dri.freedesktop.org/libdrm/$(LIBDRM_ARCHIVE)
-LIBDRM_HASH=sha256:2d5a500eef412cc287d12268eed79d571e262d4957a2ec9258073f305985054f
+LIBDRM_HASH=sha256:1d1d024b7cadc63e2b59cddaca94f78864940ab440843841113fbac6afaf2a46
 
 def all install install_h: .patched check
 
