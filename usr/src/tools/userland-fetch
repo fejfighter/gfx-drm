@@ -97,7 +97,7 @@ def validate_payload(filename, hash):
 		elif expr_tgz.match(filename):
 			file = gzip.GzipFile(filename, 'r')
 		elif expr_tar.match(filename):
-			file = tarfile.open(filename, 'r')
+			file = tarfile.open(filename)
 		else:
 			return False
 	except IOError as e:
