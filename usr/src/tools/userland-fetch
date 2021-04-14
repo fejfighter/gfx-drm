@@ -82,7 +82,7 @@ def validate_payload(filename, hash):
 	import re
 	import gzip
 	import bz2
-        import tar
+        import tarfile
 
 	expr_bz = re.compile('.+\.bz2$', re.IGNORECASE)
 	expr_gz = re.compile('.+\.gz$', re.IGNORECASE)
