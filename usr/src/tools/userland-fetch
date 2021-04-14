@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 #
 # CDDL HEADER START
 #
@@ -82,12 +82,12 @@ def validate_payload(filename, hash):
 	import re
 	import gzip
 	import bz2
-        import tarfile
+        import lzma
 
 	expr_bz = re.compile('.+\.bz2$', re.IGNORECASE)
 	expr_gz = re.compile('.+\.gz$', re.IGNORECASE)
 	expr_tgz = re.compile('.+\.tgz$', re.IGNORECASE)
-        expr_tar = re.compile('.+\.tar$', re.IGNORECASE)
+        expr_xz = re.compile('.+\.xz$', re.IGNORECASE)
 
 	try:
 		if expr_bz.match(filename):
@@ -96,8 +96,8 @@ def validate_payload(filename, hash):
 			file = gzip.GzipFile(filename, 'r')
 		elif expr_tgz.match(filename):
 			file = gzip.GzipFile(filename, 'r')
-		elif expr_tar.match(filename):
-			file = tarfile.open(filename, 'r|')
+		elif expr_xz.match(filename):
+			file = lzma.LzmaFile(filename, 'r|')
 		else:
 			return False
 	except IOError as e:
