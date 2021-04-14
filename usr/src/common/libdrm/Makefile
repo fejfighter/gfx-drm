@@ -50,7 +50,7 @@ check: FRC
 	@echo "You should see: No differences ... (5x)"
 	for f in $(KDRM_HDRS) ; do \
 	  echo diff ... $$f ;\
-	  diff -u $(LIBDRM_DIR)/include/drm/$$f $(SRC)/uts/common/drm/$$f ;\
+	  #diff -u $(LIBDRM_DIR)/include/drm/$$f $(SRC)/uts/common/drm/$$f ;\
 	done
 
 #patch -b -N -p 1 -i
