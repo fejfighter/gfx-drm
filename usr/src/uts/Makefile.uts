@@ -213,7 +213,7 @@ AS_CPPFLAGS	= $(ALWAYS_DEFS) $(ALL_DEFS) $(CONFIG_DEFS) $(AS_DEFS) \
 #
 
 # Override the default, the kernel is squeaky clean
-CERRWARN = -Werror -Wall #-errtags=yes -errwarn=%all
+CERRWARN = -Werror -Wall  -Wno-unused-but-set-variable #-errtags=yes -errwarn=%all
 
 CERRWARN += -Wno-missing-braces
 CERRWARN += -Wno-sign-compare
