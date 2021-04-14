@@ -368,7 +368,7 @@ ILDOFF=			-xildoff
 XDEPEND=		-xdepend
 XFFLAG=			-xF=%all
 XESS=			-xs
-XSTRCONST=		-xstrconst
+XSTRCONST=		
 
 #
 # illumos gate would turn warnings into errors (C) here.
