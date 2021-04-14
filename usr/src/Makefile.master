@@ -396,8 +396,8 @@ $(RELEASE_BUILD)CERRWARN += -Wno-empty-body
 CCERRWARN=		-xwe
 
 # C99 mode
-C99_ENABLE=	-xc99=%all
-C99_DISABLE=	-xc99=%none
+C99_ENABLE=	-std=gnu99
+C99_DISABLE=	-std=gnu89
 C99MODE=	$(C99_ENABLE)
 C99LMODE=	$(C99MODE:-xc99%=-Xc99%)
 
