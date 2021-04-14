@@ -266,8 +266,8 @@ BUILD64=	$($(MACH)_BUILD64)
 # so force extended ANSI mode globally. Lower level makefiles can
 # override this by setting CCMODE.
 #
-CCMODE=			-Xa
-CCMODE64=		-Xa
+CCMODE=			
+CCMODE64=		
 
 #
 # C compiler verbose mode. This is so we can enable it globally,
@@ -300,16 +300,16 @@ CCABS32=		-Wc,-xcode=abs32
 #
 # generate v9 code which tolerates callers using the v7 ABI, for the sake of
 # system calls.
-CC32BITCALLERS=		-_gcc=-massume-32bit-callers
+CC32BITCALLERS=		-massume-32bit-callers
 
 # GCC, especially, is increasingly beginning to auto-inline functions and
 # sadly does so separately not under the general -fno-inline-functions
 # Additionally, we wish to prevent optimisations which cause GCC to clone
 # functions -- in particular, these may cause unhelpful symbols to be
 # emitted instead of function names
-CCNOAUTOINLINE= -_gcc=-fno-inline-small-functions \
-	-_gcc=-fno-inline-functions-called-once \
-	-_gcc=-fno-ipa-cp
+CCNOAUTOINLINE= -fno-inline-small-functions \
+	-fno-inline-functions-called-once \
+	-fno-ipa-cp
 
 # One optimization the compiler might perform is to turn this:
 #	#pragma weak foo
@@ -347,12 +347,12 @@ amd64_AS_XARCH=		-xarch=amd64 -P -Ui386 -U__i386
 #
 # XX64	future versions of gcc will make -mcmodel=kernel imply -mno-red-zone
 #
-sparc_STAND_FLAGS=	-_gcc=-ffreestanding
-sparcv9_STAND_FLAGS=	-_gcc=-ffreestanding
+sparc_STAND_FLAGS=	-ffreestanding
+sparcv9_STAND_FLAGS=	-ffreestanding
 # Disabling MMX also disables 3DNow, disabling SSE also disables all later
 # additions to SSE (SSE2, AVX ,etc.)
-NO_SIMD=		-_gcc=-mno-mmx -_gcc=-mno-sse
-i386_STAND_FLAGS=	-_gcc=-ffreestanding $(NO_SIMD)
+NO_SIMD=		-mno-mmx -mno-sse
+i386_STAND_FLAGS=	-ffreestanding $(NO_SIMD)
 amd64_STAND_FLAGS=	-xmodel=kernel $(NO_SIMD)
 
 SAVEARGS=		-Wu,-save_args
@@ -377,19 +377,19 @@ CERRWARN = -errtags=yes # -errwarn=%all
 CERRWARN += -erroff=E_EMPTY_TRANSLATION_UNIT
 CERRWARN += -erroff=E_STATEMENT_NOT_REACHED
 
-CERRWARN += -_gcc=-Wno-missing-braces
-CERRWARN += -_gcc=-Wno-sign-compare
-CERRWARN += -_gcc=-Wno-unknown-pragmas
-CERRWARN += -_gcc=-Wno-unused-parameter
-CERRWARN += -_gcc=-Wno-missing-field-initializers
+CERRWARN += -Wno-missing-braces
+CERRWARN += -Wno-sign-compare
+CERRWARN += -Wno-unknown-pragmas
+CERRWARN += -Wno-unused-parameter
+CERRWARN += -Wno-missing-field-initializers
 
 # Unfortunately, this option can misfire very easily and unfixably.
-CERRWARN +=	-_gcc=-Wno-array-bounds
+CERRWARN +=	-Wno-array-bounds
 
 # DEBUG v. -nd make for frequent unused variables, empty conditions, etc. in
 # -nd builds
-$(RELEASE_BUILD)CERRWARN += -_gcc=-Wno-unused
-$(RELEASE_BUILD)CERRWARN += -_gcc=-Wno-empty-body
+$(RELEASE_BUILD)CERRWARN += -Wno-unused
+$(RELEASE_BUILD)CERRWARN += -Wno-empty-body
 
 #
 # turn warnings into errors (C++)
@@ -775,8 +775,8 @@ CW_CCC_COMPILERS=	$(PRIMARY_CCC:%=--primary %) $(SHADOW_CCCS:%=--shadow %)
 # that we use (currently only c and c++).
 #
 CW=			$(TOOLS_PROTO)$(ONBLD_TOOLS)/bin/$(MACH)/cw
-BUILD_CC=		$(PRIMARY_CC) -- ##$(CW) $(CW_CC_COMPILERS) --
-BUILD_CCC=		$(PRIMARY_CCC) -- #$(CW) -C $(CW_CCC_COMPILERS) --
+BUILD_CC=		$(PRIMARY_CC) ##$(CW) $(CW_CC_COMPILERS) --
+BUILD_CCC=		$(PRIMARY_CCC) #$(CW) -C $(CW_CCC_COMPILERS) --
 BUILD_CPP=		/usr/ccs/lib/cpp
 BUILD_LD=		/usr/ccs/bin/ld
 BUILD_LINT=		$(SPRO_ROOT)/sunstudio12.1/bin/lint
@@ -869,10 +869,10 @@ C_BIGPICFLAGS64 =	$($(MACH64)_C_BIGPICFLAGS)
 
 # CC requires there to be no space between '-K' and 'pic' or 'PIC'.
 # and does not support -f
-sparc_CC_PICFLAGS =	-_cc=-Kpic -_gcc=-fpic
-sparcv9_CC_PICFLAGS =	-_cc=-KPIC -_gcc=-fPIC
-i386_CC_PICFLAGS =	-_cc=-Kpic -_gcc=-fpic
-amd64_CC_PICFLAGS =	-_cc=-Kpic -_gcc=-fpic
+sparc_CC_PICFLAGS =	-_cc=-Kpic -fpic
+sparcv9_CC_PICFLAGS =	-_cc=-KPIC -fPIC
+i386_CC_PICFLAGS =	-_cc=-Kpic -fpic
+amd64_CC_PICFLAGS =	-_cc=-Kpic -fpic
 CC_PICFLAGS =		$($(MACH)_CC_PICFLAGS)
 CC_PICFLAGS64 =		$($(MACH64)_CC_PICFLAGS)
 
