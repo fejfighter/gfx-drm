@@ -56,7 +56,8 @@ check: FRC
 .patched: .unpacked
 	(cd $(LIBDRM_DIR) && \
 	for p in ../patches/*.patch ; do \
-	patch -b -N -p 1 -i $$p ; done )
+	\ #patch -b -N -p 1 -i
+	echo $$p ; done )
 	touch $@
 
 .unpacked: $(USERLAND_ARCHIVES)$(LIBDRM_ARCHIVE)
