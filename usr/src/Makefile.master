@@ -779,8 +779,8 @@ CW_CCC_COMPILERS=	$(PRIMARY_CCC:%=--primary %) $(SHADOW_CCCS:%=--shadow %)
 # that we use (currently only c and c++).
 #
 CW=			$(TOOLS_PROTO)$(ONBLD_TOOLS)/bin/$(MACH)/cw
-BUILD_CC=		$(CW) $(CW_CC_COMPILERS) --
-BUILD_CCC=		$(CW) -C $(CW_CCC_COMPILERS) --
+BUILD_CC=		$(PRIMARY_CC) -- ##$(CW) $(CW_CC_COMPILERS) --
+BUILD_CCC=		$(PRIMARY_CCC) -- #$(CW) -C $(CW_CCC_COMPILERS) --
 BUILD_CPP=		/usr/ccs/lib/cpp
 BUILD_LD=		/usr/ccs/bin/ld
 BUILD_LINT=		$(SPRO_ROOT)/sunstudio12.1/bin/lint
