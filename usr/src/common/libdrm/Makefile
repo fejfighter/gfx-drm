@@ -58,8 +58,8 @@ check: FRC
 	patch -b -N -p 1 -i $$p ; done )
 	touch $@
 
-.unpacked: $(USERLAND_ARCHIVES)$(LIBDRM_ARCHIVE)
 #tar xvfjo $(USERLAND_ARCHIVES)$(LIBDRM_ARCHIVE)
+.unpacked: $(USERLAND_ARCHIVES)$(LIBDRM_ARCHIVE)
 	xz -d $(USERLAND_ARCHIVES)$(LIBDRM_ARCHIVE)
 	touch $@
 
