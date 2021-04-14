@@ -53,10 +53,10 @@ check: FRC
 	  diff -u $(LIBDRM_DIR)/include/drm/$$f $(SRC)/uts/common/drm/$$f ;\
 	done
 
+#patch -b -N -p 1 -i
 .patched: .unpacked
 	(cd $(LIBDRM_DIR) && \
 	for p in ../patches/*.patch ; do \
-	\ #patch -b -N -p 1 -i
 	echo $$p ; done )
 	touch $@
 
