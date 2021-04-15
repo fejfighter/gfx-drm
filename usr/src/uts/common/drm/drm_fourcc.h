@@ -1,232 +1,323 @@
 /*
- * Copyright 2011 Intel Corporation
+ * Copyright (c) 2016 Laurent Pinchart <laurent.pinchart@ideasonboard.com>
  *
- * Permission is hereby granted, free of charge, to any person obtaining a
- * copy of this software and associated documentation files (the "Software"),
- * to deal in the Software without restriction, including without limitation
- * the rights to use, copy, modify, merge, publish, distribute, sublicense,
- * and/or sell copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following conditions:
+ * Permission to use, copy, modify, distribute, and sell this software and its
+ * documentation for any purpose is hereby granted without fee, provided that
+ * the above copyright notice appear in all copies and that both that copyright
+ * notice and this permission notice appear in supporting documentation, and
+ * that the name of the copyright holders not be used in advertising or
+ * publicity pertaining to distribution of the software without specific,
+ * written prior permission.  The copyright holders make no representations
+ * about the suitability of this software for any purpose.  It is provided "as
+ * is" without express or implied warranty.
  *
- * The above copyright notice and this permission notice (including the next
- * paragraph) shall be included in all copies or substantial portions of the
- * Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
- * VA LINUX SYSTEMS AND/OR ITS SUPPLIERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
- * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD TO THIS SOFTWARE,
+ * INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS, IN NO
+ * EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY SPECIAL, INDIRECT OR
+ * CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE,
+ * DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE
+ * OF THIS SOFTWARE.
  */
+#ifndef __DRM_FOURCC_H__
+#define __DRM_FOURCC_H__
 
-#ifndef DRM_FOURCC_H
-#define DRM_FOURCC_H
-
-#include "drm.h"
-
-#define fourcc_code(a, b, c, d) ((__u32)(a) | ((__u32)(b) << 8) | \
-				 ((__u32)(c) << 16) | ((__u32)(d) << 24))
-
-#define DRM_FORMAT_BIG_ENDIAN (1<<31) /* format is big endian instead of little endian */
-
-/* color index */
-#define DRM_FORMAT_C8		fourcc_code('C', '8', ' ', ' ') /* [7:0] C */
-
-/* 8 bpp Red */
-#define DRM_FORMAT_R8		fourcc_code('R', '8', ' ', ' ') /* [7:0] R */
-
-/* 16 bpp RG */
-#define DRM_FORMAT_RG88		fourcc_code('R', 'G', '8', '8') /* [15:0] R:G 8:8 little endian */
-#define DRM_FORMAT_GR88		fourcc_code('G', 'R', '8', '8') /* [15:0] G:R 8:8 little endian */
-
-/* 8 bpp RGB */
-#define DRM_FORMAT_RGB332	fourcc_code('R', 'G', 'B', '8') /* [7:0] R:G:B 3:3:2 */
-#define DRM_FORMAT_BGR233	fourcc_code('B', 'G', 'R', '8') /* [7:0] B:G:R 2:3:3 */
-
-/* 16 bpp RGB */
-#define DRM_FORMAT_XRGB4444	fourcc_code('X', 'R', '1', '2') /* [15:0] x:R:G:B 4:4:4:4 little endian */
-#define DRM_FORMAT_XBGR4444	fourcc_code('X', 'B', '1', '2') /* [15:0] x:B:G:R 4:4:4:4 little endian */
-#define DRM_FORMAT_RGBX4444	fourcc_code('R', 'X', '1', '2') /* [15:0] R:G:B:x 4:4:4:4 little endian */
-#define DRM_FORMAT_BGRX4444	fourcc_code('B', 'X', '1', '2') /* [15:0] B:G:R:x 4:4:4:4 little endian */
-
-#define DRM_FORMAT_ARGB4444	fourcc_code('A', 'R', '1', '2') /* [15:0] A:R:G:B 4:4:4:4 little endian */
-#define DRM_FORMAT_ABGR4444	fourcc_code('A', 'B', '1', '2') /* [15:0] A:B:G:R 4:4:4:4 little endian */
-#define DRM_FORMAT_RGBA4444	fourcc_code('R', 'A', '1', '2') /* [15:0] R:G:B:A 4:4:4:4 little endian */
-#define DRM_FORMAT_BGRA4444	fourcc_code('B', 'A', '1', '2') /* [15:0] B:G:R:A 4:4:4:4 little endian */
-
-#define DRM_FORMAT_XRGB1555	fourcc_code('X', 'R', '1', '5') /* [15:0] x:R:G:B 1:5:5:5 little endian */
-#define DRM_FORMAT_XBGR1555	fourcc_code('X', 'B', '1', '5') /* [15:0] x:B:G:R 1:5:5:5 little endian */
-#define DRM_FORMAT_RGBX5551	fourcc_code('R', 'X', '1', '5') /* [15:0] R:G:B:x 5:5:5:1 little endian */
-#define DRM_FORMAT_BGRX5551	fourcc_code('B', 'X', '1', '5') /* [15:0] B:G:R:x 5:5:5:1 little endian */
-
-#define DRM_FORMAT_ARGB1555	fourcc_code('A', 'R', '1', '5') /* [15:0] A:R:G:B 1:5:5:5 little endian */
-#define DRM_FORMAT_ABGR1555	fourcc_code('A', 'B', '1', '5') /* [15:0] A:B:G:R 1:5:5:5 little endian */
-#define DRM_FORMAT_RGBA5551	fourcc_code('R', 'A', '1', '5') /* [15:0] R:G:B:A 5:5:5:1 little endian */
-#define DRM_FORMAT_BGRA5551	fourcc_code('B', 'A', '1', '5') /* [15:0] B:G:R:A 5:5:5:1 little endian */
-
-#define DRM_FORMAT_RGB565	fourcc_code('R', 'G', '1', '6') /* [15:0] R:G:B 5:6:5 little endian */
-#define DRM_FORMAT_BGR565	fourcc_code('B', 'G', '1', '6') /* [15:0] B:G:R 5:6:5 little endian */
-
-/* 24 bpp RGB */
-#define DRM_FORMAT_RGB888	fourcc_code('R', 'G', '2', '4') /* [23:0] R:G:B little endian */
-#define DRM_FORMAT_BGR888	fourcc_code('B', 'G', '2', '4') /* [23:0] B:G:R little endian */
-
-/* 32 bpp RGB */
-#define DRM_FORMAT_XRGB8888	fourcc_code('X', 'R', '2', '4') /* [31:0] x:R:G:B 8:8:8:8 little endian */
-#define DRM_FORMAT_XBGR8888	fourcc_code('X', 'B', '2', '4') /* [31:0] x:B:G:R 8:8:8:8 little endian */
-#define DRM_FORMAT_RGBX8888	fourcc_code('R', 'X', '2', '4') /* [31:0] R:G:B:x 8:8:8:8 little endian */
-#define DRM_FORMAT_BGRX8888	fourcc_code('B', 'X', '2', '4') /* [31:0] B:G:R:x 8:8:8:8 little endian */
-
-#define DRM_FORMAT_ARGB8888	fourcc_code('A', 'R', '2', '4') /* [31:0] A:R:G:B 8:8:8:8 little endian */
-#define DRM_FORMAT_ABGR8888	fourcc_code('A', 'B', '2', '4') /* [31:0] A:B:G:R 8:8:8:8 little endian */
-#define DRM_FORMAT_RGBA8888	fourcc_code('R', 'A', '2', '4') /* [31:0] R:G:B:A 8:8:8:8 little endian */
-#define DRM_FORMAT_BGRA8888	fourcc_code('B', 'A', '2', '4') /* [31:0] B:G:R:A 8:8:8:8 little endian */
-
-#define DRM_FORMAT_XRGB2101010	fourcc_code('X', 'R', '3', '0') /* [31:0] x:R:G:B 2:10:10:10 little endian */
-#define DRM_FORMAT_XBGR2101010	fourcc_code('X', 'B', '3', '0') /* [31:0] x:B:G:R 2:10:10:10 little endian */
-#define DRM_FORMAT_RGBX1010102	fourcc_code('R', 'X', '3', '0') /* [31:0] R:G:B:x 10:10:10:2 little endian */
-#define DRM_FORMAT_BGRX1010102	fourcc_code('B', 'X', '3', '0') /* [31:0] B:G:R:x 10:10:10:2 little endian */
-
-#define DRM_FORMAT_ARGB2101010	fourcc_code('A', 'R', '3', '0') /* [31:0] A:R:G:B 2:10:10:10 little endian */
-#define DRM_FORMAT_ABGR2101010	fourcc_code('A', 'B', '3', '0') /* [31:0] A:B:G:R 2:10:10:10 little endian */
-#define DRM_FORMAT_RGBA1010102	fourcc_code('R', 'A', '3', '0') /* [31:0] R:G:B:A 10:10:10:2 little endian */
-#define DRM_FORMAT_BGRA1010102	fourcc_code('B', 'A', '3', '0') /* [31:0] B:G:R:A 10:10:10:2 little endian */
-
-/* packed YCbCr */
-#define DRM_FORMAT_YUYV		fourcc_code('Y', 'U', 'Y', 'V') /* [31:0] Cr0:Y1:Cb0:Y0 8:8:8:8 little endian */
-#define DRM_FORMAT_YVYU		fourcc_code('Y', 'V', 'Y', 'U') /* [31:0] Cb0:Y1:Cr0:Y0 8:8:8:8 little endian */
-#define DRM_FORMAT_UYVY		fourcc_code('U', 'Y', 'V', 'Y') /* [31:0] Y1:Cr0:Y0:Cb0 8:8:8:8 little endian */
-#define DRM_FORMAT_VYUY		fourcc_code('V', 'Y', 'U', 'Y') /* [31:0] Y1:Cb0:Y0:Cr0 8:8:8:8 little endian */
-
-#define DRM_FORMAT_AYUV		fourcc_code('A', 'Y', 'U', 'V') /* [31:0] A:Y:Cb:Cr 8:8:8:8 little endian */
+#include <linux/types.h>
+#include <uapi/drm/drm_fourcc.h>
 
 /*
- * 2 plane YCbCr
- * index 0 = Y plane, [7:0] Y
- * index 1 = Cr:Cb plane, [15:0] Cr:Cb little endian
- * or
- * index 1 = Cb:Cr plane, [15:0] Cb:Cr little endian
+ * DRM formats are little endian.  Define host endian variants for the
+ * most common formats here, to reduce the #ifdefs needed in drivers.
+ *
+ * Note that the DRM_FORMAT_BIG_ENDIAN flag should only be used in
+ * case the format can't be specified otherwise, so we don't end up
+ * with two values describing the same format.
  */
-#define DRM_FORMAT_NV12		fourcc_code('N', 'V', '1', '2') /* 2x2 subsampled Cr:Cb plane */
-#define DRM_FORMAT_NV21		fourcc_code('N', 'V', '2', '1') /* 2x2 subsampled Cb:Cr plane */
-#define DRM_FORMAT_NV16		fourcc_code('N', 'V', '1', '6') /* 2x1 subsampled Cr:Cb plane */
-#define DRM_FORMAT_NV61		fourcc_code('N', 'V', '6', '1') /* 2x1 subsampled Cb:Cr plane */
-#define DRM_FORMAT_NV24		fourcc_code('N', 'V', '2', '4') /* non-subsampled Cr:Cb plane */
-#define DRM_FORMAT_NV42		fourcc_code('N', 'V', '4', '2') /* non-subsampled Cb:Cr plane */
+#ifdef __BIG_ENDIAN
+# define DRM_FORMAT_HOST_XRGB1555     (DRM_FORMAT_XRGB1555         |	\
+				       DRM_FORMAT_BIG_ENDIAN)
+# define DRM_FORMAT_HOST_RGB565       (DRM_FORMAT_RGB565           |	\
+				       DRM_FORMAT_BIG_ENDIAN)
+# define DRM_FORMAT_HOST_XRGB8888     DRM_FORMAT_BGRX8888
+# define DRM_FORMAT_HOST_ARGB8888     DRM_FORMAT_BGRA8888
+#else
+# define DRM_FORMAT_HOST_XRGB1555     DRM_FORMAT_XRGB1555
+# define DRM_FORMAT_HOST_RGB565       DRM_FORMAT_RGB565
+# define DRM_FORMAT_HOST_XRGB8888     DRM_FORMAT_XRGB8888
+# define DRM_FORMAT_HOST_ARGB8888     DRM_FORMAT_ARGB8888
+#endif
 
-/*
- * 3 plane YCbCr
- * index 0: Y plane, [7:0] Y
- * index 1: Cb plane, [7:0] Cb
- * index 2: Cr plane, [7:0] Cr
- * or
- * index 1: Cr plane, [7:0] Cr
- * index 2: Cb plane, [7:0] Cb
+struct drm_device;
+struct drm_mode_fb_cmd2;
+
+/**
+ * struct drm_format_info - information about a DRM format
  */
-#define DRM_FORMAT_YUV410	fourcc_code('Y', 'U', 'V', '9') /* 4x4 subsampled Cb (1) and Cr (2) planes */
-#define DRM_FORMAT_YVU410	fourcc_code('Y', 'V', 'U', '9') /* 4x4 subsampled Cr (1) and Cb (2) planes */
-#define DRM_FORMAT_YUV411	fourcc_code('Y', 'U', '1', '1') /* 4x1 subsampled Cb (1) and Cr (2) planes */
-#define DRM_FORMAT_YVU411	fourcc_code('Y', 'V', '1', '1') /* 4x1 subsampled Cr (1) and Cb (2) planes */
-#define DRM_FORMAT_YUV420	fourcc_code('Y', 'U', '1', '2') /* 2x2 subsampled Cb (1) and Cr (2) planes */
-#define DRM_FORMAT_YVU420	fourcc_code('Y', 'V', '1', '2') /* 2x2 subsampled Cr (1) and Cb (2) planes */
-#define DRM_FORMAT_YUV422	fourcc_code('Y', 'U', '1', '6') /* 2x1 subsampled Cb (1) and Cr (2) planes */
-#define DRM_FORMAT_YVU422	fourcc_code('Y', 'V', '1', '6') /* 2x1 subsampled Cr (1) and Cb (2) planes */
-#define DRM_FORMAT_YUV444	fourcc_code('Y', 'U', '2', '4') /* non-subsampled Cb (1) and Cr (2) planes */
-#define DRM_FORMAT_YVU444	fourcc_code('Y', 'V', '2', '4') /* non-subsampled Cr (1) and Cb (2) planes */
+struct drm_format_info {
+	/** @format: 4CC format identifier (DRM_FORMAT_*) */
+	u32 format;
 
+	/**
+	 * @depth:
+	 *
+	 * Color depth (number of bits per pixel excluding padding bits),
+	 * valid for a subset of RGB formats only. This is a legacy field, do
+	 * not use in new code and set to 0 for new formats.
+	 */
+	u8 depth;
 
-/*
- * Format Modifiers:
- *
- * Format modifiers describe, typically, a re-ordering or modification
- * of the data in a plane of an FB.  This can be used to express tiled/
- * swizzled formats, or compression, or a combination of the two.
- *
- * The upper 8 bits of the format modifier are a vendor-id as assigned
- * below.  The lower 56 bits are assigned as vendor sees fit.
+	/** @num_planes: Number of color planes (1 to 3) */
+	u8 num_planes;
+
+	union {
+		/**
+		 * @cpp:
+		 *
+		 * Number of bytes per pixel (per plane), this is aliased with
+		 * @char_per_block. It is deprecated in favour of using the
+		 * triplet @char_per_block, @block_w, @block_h for better
+		 * describing the pixel format.
+		 */
+		u8 cpp[4];
+
+		/**
+		 * @char_per_block:
+		 *
+		 * Number of bytes per block (per plane), where blocks are
+		 * defined as a rectangle of pixels which are stored next to
+		 * each other in a byte aligned memory region. Together with
+		 * @block_w and @block_h this is used to properly describe tiles
+		 * in tiled formats or to describe groups of pixels in packed
+		 * formats for which the memory needed for a single pixel is not
+		 * byte aligned.
+		 *
+		 * @cpp has been kept for historical reasons because there are
+		 * a lot of places in drivers where it's used. In drm core for
+		 * generic code paths the preferred way is to use
+		 * @char_per_block, drm_format_info_block_width() and
+		 * drm_format_info_block_height() which allows handling both
+		 * block and non-block formats in the same way.
+		 *
+		 * For formats that are intended to be used only with non-linear
+		 * modifiers both @cpp and @char_per_block must be 0 in the
+		 * generic format table. Drivers could supply accurate
+		 * information from their drm_mode_config.get_format_info hook
+		 * if they want the core to be validating the pitch.
+		 */
+		u8 char_per_block[4];
+	};
+
+	/**
+	 * @block_w:
+	 *
+	 * Block width in pixels, this is intended to be accessed through
+	 * drm_format_info_block_width()
+	 */
+	u8 block_w[4];
+
+	/**
+	 * @block_h:
+	 *
+	 * Block height in pixels, this is intended to be accessed through
+	 * drm_format_info_block_height()
+	 */
+	u8 block_h[4];
+
+	/** @hsub: Horizontal chroma subsampling factor */
+	u8 hsub;
+	/** @vsub: Vertical chroma subsampling factor */
+	u8 vsub;
+
+	/** @has_alpha: Does the format embeds an alpha component? */
+	bool has_alpha;
+
+	/** @is_yuv: Is it a YUV format? */
+	bool is_yuv;
+};
+
+/**
+ * struct drm_format_name_buf - name of a DRM format
+ * @str: string buffer containing the format name
  */
+struct drm_format_name_buf {
+	char str[32];
+};
 
-/* Vendor Ids: */
-#define DRM_FORMAT_MOD_NONE           0
-#define DRM_FORMAT_MOD_VENDOR_INTEL   0x01
-#define DRM_FORMAT_MOD_VENDOR_AMD     0x02
-#define DRM_FORMAT_MOD_VENDOR_NV      0x03
-#define DRM_FORMAT_MOD_VENDOR_SAMSUNG 0x04
-#define DRM_FORMAT_MOD_VENDOR_QCOM    0x05
-/* add more to the end as needed */
-
-#define fourcc_mod_code(vendor, val) \
-	((((__u64)DRM_FORMAT_MOD_VENDOR_## vendor) << 56) | (val & 0x00ffffffffffffffULL))
-
-/*
- * Format Modifier tokens:
+/**
+ * drm_format_info_is_yuv_packed - check that the format info matches a YUV
+ * format with data laid in a single plane
+ * @info: format info
  *
- * When adding a new token please document the layout with a code comment,
- * similar to the fourcc codes above. drm_fourcc.h is considered the
- * authoritative source for all of these.
+ * Returns:
+ * A boolean indicating whether the format info matches a packed YUV format.
  */
+static inline bool
+drm_format_info_is_yuv_packed(const struct drm_format_info *info)
+{
+	return info->is_yuv && info->num_planes == 1;
+}
 
-/* Intel framebuffer modifiers */
-
-/*
- * Intel X-tiling layout
+/**
+ * drm_format_info_is_yuv_semiplanar - check that the format info matches a YUV
+ * format with data laid in two planes (luminance and chrominance)
+ * @info: format info
  *
- * This is a tiled layout using 4Kb tiles (except on gen2 where the tiles 2Kb)
- * in row-major layout. Within the tile bytes are laid out row-major, with
- * a platform-dependent stride. On top of that the memory can apply
- * platform-depending swizzling of some higher address bits into bit6.
- *
- * This format is highly platforms specific and not useful for cross-driver
- * sharing. It exists since on a given platform it does uniquely identify the
- * layout in a simple way for i915-specific userspace.
+ * Returns:
+ * A boolean indicating whether the format info matches a semiplanar YUV format.
  */
-#define I915_FORMAT_MOD_X_TILED	fourcc_mod_code(INTEL, 1)
+static inline bool
+drm_format_info_is_yuv_semiplanar(const struct drm_format_info *info)
+{
+	return info->is_yuv && info->num_planes == 2;
+}
 
-/*
- * Intel Y-tiling layout
+/**
+ * drm_format_info_is_yuv_planar - check that the format info matches a YUV
+ * format with data laid in three planes (one for each YUV component)
+ * @info: format info
  *
- * This is a tiled layout using 4Kb tiles (except on gen2 where the tiles 2Kb)
- * in row-major layout. Within the tile bytes are laid out in OWORD (16 bytes)
- * chunks column-major, with a platform-dependent height. On top of that the
- * memory can apply platform-depending swizzling of some higher address bits
- * into bit6.
- *
- * This format is highly platforms specific and not useful for cross-driver
- * sharing. It exists since on a given platform it does uniquely identify the
- * layout in a simple way for i915-specific userspace.
+ * Returns:
+ * A boolean indicating whether the format info matches a planar YUV format.
  */
-#define I915_FORMAT_MOD_Y_TILED	fourcc_mod_code(INTEL, 2)
+static inline bool
+drm_format_info_is_yuv_planar(const struct drm_format_info *info)
+{
+	return info->is_yuv && info->num_planes == 3;
+}
 
-/*
- * Intel Yf-tiling layout
+/**
+ * drm_format_info_is_yuv_sampling_410 - check that the format info matches a
+ * YUV format with 4:1:0 sub-sampling
+ * @info: format info
  *
- * This is a tiled layout using 4Kb tiles in row-major layout.
- * Within the tile pixels are laid out in 16 256 byte units / sub-tiles which
- * are arranged in four groups (two wide, two high) with column-major layout.
- * Each group therefore consits out of four 256 byte units, which are also laid
- * out as 2x2 column-major.
- * 256 byte units are made out of four 64 byte blocks of pixels, producing
- * either a square block or a 2:1 unit.
- * 64 byte blocks of pixels contain four pixel rows of 16 bytes, where the width
- * in pixel depends on the pixel depth.
+ * Returns:
+ * A boolean indicating whether the format info matches a YUV format with 4:1:0
+ * sub-sampling.
  */
-#define I915_FORMAT_MOD_Yf_TILED fourcc_mod_code(INTEL, 3)
+static inline bool
+drm_format_info_is_yuv_sampling_410(const struct drm_format_info *info)
+{
+	return info->is_yuv && info->hsub == 4 && info->vsub == 4;
+}
 
-/*
- * Tiled, NV12MT, grouped in 64 (pixels) x 32 (lines) -sized macroblocks
+/**
+ * drm_format_info_is_yuv_sampling_411 - check that the format info matches a
+ * YUV format with 4:1:1 sub-sampling
+ * @info: format info
  *
- * Macroblocks are laid in a Z-shape, and each pixel data is following the
- * standard NV12 style.
- * As for NV12, an image is the result of two frame buffers: one for Y,
- * one for the interleaved Cb/Cr components (1/2 the height of the Y buffer).
- * Alignment requirements are (for each buffer):
- * - multiple of 128 pixels for the width
- * - multiple of  32 pixels for the height
- *
- * For more information: see https://linuxtv.org/downloads/v4l-dvb-apis/re32.html
+ * Returns:
+ * A boolean indicating whether the format info matches a YUV format with 4:1:1
+ * sub-sampling.
  */
-#define DRM_FORMAT_MOD_SAMSUNG_64_32_TILE	fourcc_mod_code(SAMSUNG, 1)
+static inline bool
+drm_format_info_is_yuv_sampling_411(const struct drm_format_info *info)
+{
+	return info->is_yuv && info->hsub == 4 && info->vsub == 1;
+}
 
-#endif /* DRM_FOURCC_H */
+/**
+ * drm_format_info_is_yuv_sampling_420 - check that the format info matches a
+ * YUV format with 4:2:0 sub-sampling
+ * @info: format info
+ *
+ * Returns:
+ * A boolean indicating whether the format info matches a YUV format with 4:2:0
+ * sub-sampling.
+ */
+static inline bool
+drm_format_info_is_yuv_sampling_420(const struct drm_format_info *info)
+{
+	return info->is_yuv && info->hsub == 2 && info->vsub == 2;
+}
+
+/**
+ * drm_format_info_is_yuv_sampling_422 - check that the format info matches a
+ * YUV format with 4:2:2 sub-sampling
+ * @info: format info
+ *
+ * Returns:
+ * A boolean indicating whether the format info matches a YUV format with 4:2:2
+ * sub-sampling.
+ */
+static inline bool
+drm_format_info_is_yuv_sampling_422(const struct drm_format_info *info)
+{
+	return info->is_yuv && info->hsub == 2 && info->vsub == 1;
+}
+
+/**
+ * drm_format_info_is_yuv_sampling_444 - check that the format info matches a
+ * YUV format with 4:4:4 sub-sampling
+ * @info: format info
+ *
+ * Returns:
+ * A boolean indicating whether the format info matches a YUV format with 4:4:4
+ * sub-sampling.
+ */
+static inline bool
+drm_format_info_is_yuv_sampling_444(const struct drm_format_info *info)
+{
+	return info->is_yuv && info->hsub == 1 && info->vsub == 1;
+}
+
+/**
+ * drm_format_info_plane_width - width of the plane given the first plane
+ * @info: pixel format info
+ * @width: width of the first plane
+ * @plane: plane index
+ *
+ * Returns:
+ * The width of @plane, given that the width of the first plane is @width.
+ */
+static inline
+int drm_format_info_plane_width(const struct drm_format_info *info, int width,
+				int plane)
+{
+	if (!info || plane >= info->num_planes)
+		return 0;
+
+	if (plane == 0)
+		return width;
+
+	return width / info->hsub;
+}
+
+/**
+ * drm_format_info_plane_height - height of the plane given the first plane
+ * @info: pixel format info
+ * @height: height of the first plane
+ * @plane: plane index
+ *
+ * Returns:
+ * The height of @plane, given that the height of the first plane is @height.
+ */
+static inline
+int drm_format_info_plane_height(const struct drm_format_info *info, int height,
+				 int plane)
+{
+	if (!info || plane >= info->num_planes)
+		return 0;
+
+	if (plane == 0)
+		return height;
+
+	return height / info->vsub;
+}
+
+const struct drm_format_info *__drm_format_info(u32 format);
+const struct drm_format_info *drm_format_info(u32 format);
+const struct drm_format_info *
+drm_get_format_info(struct drm_device *dev,
+		    const struct drm_mode_fb_cmd2 *mode_cmd);
+uint32_t drm_mode_legacy_fb_format(uint32_t bpp, uint32_t depth);
+uint32_t drm_driver_legacy_fb_format(struct drm_device *dev,
+				     uint32_t bpp, uint32_t depth);
+unsigned int drm_format_info_block_width(const struct drm_format_info *info,
+					 int plane);
+unsigned int drm_format_info_block_height(const struct drm_format_info *info,
+					  int plane);
+uint64_t drm_format_info_min_pitch(const struct drm_format_info *info,
+				   int plane, unsigned int buffer_width);
+const char *drm_get_format_name(uint32_t format, struct drm_format_name_buf *buf);
+
+#endif /* __DRM_FOURCC_H__ */
